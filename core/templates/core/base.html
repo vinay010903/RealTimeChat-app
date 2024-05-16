@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} - Chat Wave</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Custom font */
+            background-color: #f0f4f8; /* Light blue background */
+            color: #333; /* Dark text color */
+        }
+
+        .messages {
+            height: 400px;
+            overflow-y: auto;
+        }
+
+        .nav-link {
+            color: #fff; /* White color for navigation links */
+        }
+
+        .nav-link:hover {
+            color: #ccc; /* Light gray color on hover */
+        }
+
+        .btn {
+            padding: 8px 16px; /* Padding for buttons */
+            border-radius: 4px; /* Rounded corners */
+            background-color: #3490dc; /* Blue button background */
+            color: #fff; /* White button text color */
+            text-decoration: none; /* Remove default underline */
+        }
+
+        .btn:hover {
+            background-color: #2779bd; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <nav class="bg-red-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-Red text-xl font-bold">Chat Wave</h1>
+            <div class="flex space-x-4">
+                {% if request.user.is_authenticated %}
+                    <a href="/rooms/" class="nav-link">Rooms</a>
+                    <a href="/logout/" class="btn">Log out</a>
+                {% else %}
+                    <a href="/login/" class="nav-link">Log in</a>
+                    <a href="/signup/" class="btn">Sign up</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto mt-8">
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>
